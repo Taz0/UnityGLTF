@@ -12,25 +12,67 @@ namespace UnityGLTF
 
 	    internal static Avatar AddAvatarToGameObject(GameObject gameObject)
 	    {
-		    HumanDescription description = AvatarUtils.CreateHumanDescription(gameObject);
-		    var bones = description.human;
-		    SetupHumanSkeleton(gameObject, ref bones, out var skeletonBones, out var hasTranslationDoF);
-		    description.human = bones;
-		    description.skeleton = skeletonBones;
-		    description.hasTranslationDoF = hasTranslationDoF;
+                SkinnedMeshRenderer[] skinnedMeshRenderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
 
-		    Avatar avatar = AvatarBuilder.BuildHumanAvatar(gameObject, description);
-		    avatar.name = "Avatar";
+                foreach (SkinnedMeshRenderer rend in skinnedMeshRenderers) 
+                {
+                	Transform[] meshBones = rend.bones;
+	                bool[] meshBonesUsed = new bool[meshBones.Length];
+        	        BoneWeight[] weights = rend.sharedMesh.boneWeights;
+                	foreach (BoneWeight w in weights)
+                	{
+                    		if (w.weight0 != 0)
+		                        meshBonesUsed[w.boneIndex0] = true;
+                 		if (w.weight1 != 0)
+		                        meshBonesUsed[w.boneIndex1] = true;
+                    		if (w.weight2 != 0)
+                        		meshBonesUsed[w.boneIndex2] = true;
+                    		if (w.weight3 != 0)
+                        		meshBonesUsed[w.boneIndex3] = true;
+                	}
+					for (int i = 0; i < meshBones.Length; i++)
+					{
+						if (meshBonesUsed[i])
+						{
+							Debug.LogError(meshBones[i].name);
+						}
+                	}
+            	}
 
-		    if (!avatar.isValid)
-		    {
-			    Object.DestroyImmediate(avatar);
-			    return null;
-		    }
+            	HumanDescription description = AvatarUtils.CreateHumanDescription(gameObject);
+				var bones = description.human;
 
-		    var animator = gameObject.GetComponent<Animator>();
-		    if (animator) animator.avatar = avatar;
-		    return avatar;
+            	UnityEngine.Debug.LogError("(0) Bones " + bones.Length);
+
+            	foreach (var bone in bones)
+            	{
+                	UnityEngine.Debug.LogError(bone.humanName + "->" + bone.boneName);
+            	}
+
+            	SetupHumanSkeleton(gameObject, ref bones, out var skeletonBones, out var hasTranslationDoF);
+				description.human = bones;
+				description.skeleton = skeletonBones;
+				description.hasTranslationDoF = hasTranslationDoF;
+
+	       	 	UnityEngine.Debug.LogError("(1) Bones " + skeletonBones.Length);
+
+				foreach (var bone in skeletonBones)
+				{
+					UnityEngine.Debug.LogError(bone.name);
+				}
+
+				Avatar avatar = AvatarBuilder.BuildHumanAvatar(gameObject, description);
+				avatar.name = "Avatar";
+
+				if (!avatar.isValid)
+				{
+					Object.DestroyImmediate(avatar);
+					return null;
+				}
+
+				var animator = gameObject.GetComponent<Animator>();
+				if (animator) animator.avatar = avatar;
+				return avatar;
 	    }
 
 	    private static void SetupHumanSkeleton(
