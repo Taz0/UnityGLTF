@@ -82,7 +82,7 @@ namespace UnityGLTF
                 // UseStream is currently not supported...
                 string fullPath;
                 if (AppendStreamingAssets)
-	                fullPath = Path.Combine(Application.streamingAssetsPath, GLTFUri.TrimStart(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }));
+	                fullPath = Path.Combine(Application.persistentDataPath, GLTFUri.TrimStart(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }));
                 else
 	                fullPath = GLTFUri;
 
@@ -109,6 +109,12 @@ namespace UnityGLTF
 					// 		Debug.Log("Progress: " + p);
 					// 	})
 				);
+
+				var component = sceneImporter.CreatedObject.GetComponent(Type.GetType("Kluest.GLTFAnimator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"));
+				if (component != null)
+				{
+					component.GetType().GetProperty("CreatedAnimationClips").SetValue(component, sceneImporter.CreatedAnimationClips);
+				}
 
 				// Override the shaders on all materials if a shader is provided
 				if (shaderOverride != null)

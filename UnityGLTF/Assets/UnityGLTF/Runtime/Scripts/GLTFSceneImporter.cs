@@ -896,7 +896,7 @@ namespace UnityGLTF
 							Animator animator = sceneObj.AddComponent<Animator>();
 #if UNITY_EDITOR
 							// TODO there's no good way to construct an AnimatorController on import it seems, needs to be a SubAsset etc.
-							var controller = new UnityEditor.Animations.AnimatorController();
+							/*var controller = new UnityEditor.Animations.AnimatorController();
 							controller.name = "AnimatorController";
 							controller.AddLayer("Base Layer");
 							var baseLayer = controller.layers[0];
@@ -905,15 +905,17 @@ namespace UnityGLTF
 								var state = baseLayer.stateMachine.AddState(constructedClips[i].name);
 								state.motion = constructedClips[i];
 							}
-							animator.runtimeAnimatorController = controller;
+							animator.runtimeAnimatorController = controller;*/
 #else
-							Debug.Log(LogType.Warning, "Importing animations at runtime requires the Legacy AnimationMethod to be enabled, or custom handling of the resulting clips.");
+							//Debug.Log(LogType.Warning, "Importing animations at runtime requires the Legacy AnimationMethod to be enabled, or custom handling of the resulting clips.");
 #endif
 						}
 #else
 						Debug.Log(LogType.Warning, "glTF scene contains animations but com.unity.modules.animation isn't installed. Install that module to import animations.");
 #endif
 						CreatedAnimationClips = constructedClips.ToArray();
+
+						sceneObj.AddComponent(Type.GetType("Kluest.GLTFAnimator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"));
 					}
 				}
 
