@@ -6,7 +6,7 @@ namespace UnityGLTF
 	{
 		private const string PBRGraphGuid = "478ce3626be7a5f4ea58d6b13f05a2e4";
 
-		public PBRGraphMap() : this("UnityGLTF/PBRGraph") {}
+		public PBRGraphMap() : this("Shader Graphs/Coloreable") {}
 
 		protected PBRGraphMap(string shaderName) : base(shaderName, PBRGraphGuid) { }
 
@@ -31,8 +31,8 @@ namespace UnityGLTF
 
 		public Texture NormalTexture
 		{
-			get => _material.GetTexture("normalTexture");
-			set => _material.SetTexture("normalTexture", value);
+			get => _material.GetTexture("_BumpMap");
+			set => _material.SetTexture("_BumpMap", value);
 		}
 
 		public int NormalTexCoord
@@ -49,16 +49,16 @@ namespace UnityGLTF
 
 	    public Vector2 NormalXOffset
 	    {
-		    get => _material.GetTextureOffset("normalTexture");
-		    set => _material.SetTextureOffset("normalTexture", value);
+		    get => _material.GetTextureOffset("_BumpMap");
+		    set => _material.SetTextureOffset("_BumpMap", value);
 	    }
 
 	    public double NormalXRotation { get; set; }
 
 	    public Vector2 NormalXScale
 	    {
-		    get => _material.GetTextureScale("normalTexture");
-		    set => _material.SetTextureScale("normalTexture", value);
+		    get => _material.GetTextureScale("_BumpMap");
+		    set => _material.SetTextureScale("_BumpMap", value);
 	    }
 
 	    public int NormalXTexCoord
@@ -69,8 +69,8 @@ namespace UnityGLTF
 
 	    public Texture OcclusionTexture
 	    {
-		    get => _material.GetTexture("occlusionTexture");
-		    set => _material.SetTexture("occlusionTexture", value);
+		    get => _material.GetTexture("_Opacity_Map");
+		    set => _material.SetTexture("_Opacity_Map", value);
 	    }
 
 	    public int OcclusionTexCoord
@@ -87,8 +87,8 @@ namespace UnityGLTF
 
 	    public Vector2 OcclusionXOffset
 	    {
-		    get => _material.GetTextureOffset("occlusionTexture");
-		    set => _material.SetTextureOffset("occlusionTexture", value);
+		    get => _material.GetTextureOffset("_Opacity_Map");
+		    set => _material.SetTextureOffset("_Opacity_Map", value);
 	    }
 
 	    public double OcclusionXRotation
@@ -99,8 +99,8 @@ namespace UnityGLTF
 
 	    public Vector2 OcclusionXScale
 	    {
-		    get => _material.GetTextureScale("occlusionTexture");
-		    set => _material.SetTextureScale("occlusionTexture", value);
+		    get => _material.GetTextureScale("_Opacity_Map");
+		    set => _material.SetTextureScale("_Opacity_Map", value);
 	    }
 
 	    public int OcclusionXTexCoord
@@ -111,8 +111,8 @@ namespace UnityGLTF
 
 	    public Texture EmissiveTexture
 	    {
-		    get => _material.GetTexture("emissiveTexture");
-		    set => _material.SetTexture("emissiveTexture", value);
+		    get => _material.GetTexture("_EmissionMap");
+		    set => _material.SetTexture("_EmissionMap", value);
 	    }
 
 	    public int EmissiveTexCoord
@@ -129,16 +129,16 @@ namespace UnityGLTF
 
 	    public Vector2 EmissiveXOffset
 	    {
-		    get => _material.GetTextureOffset("emissiveTexture");
-		    set => _material.SetTextureOffset("emissiveTexture", value);
+		    get => _material.GetTextureOffset("_EmissionMap");
+		    set => _material.SetTextureOffset("_EmissionMap", value);
 	    }
 
 	    public double EmissiveXRotation { get; set; }
 
 	    public Vector2 EmissiveXScale
 	    {
-		    get => _material.GetTextureScale("emissiveTexture");
-		    set => _material.SetTextureScale("emissiveTexture", value);
+		    get => _material.GetTextureScale("_EmissionMap");
+		    set => _material.SetTextureScale("_EmissionMap", value);
 	    }
 
 	    public int EmissiveXTexCoord
@@ -149,8 +149,8 @@ namespace UnityGLTF
 
 	    public Texture MetallicRoughnessTexture
 	    {
-		    get => _material.GetTexture("metallicRoughnessTexture");
-		    set => _material.SetTexture("metallicRoughnessTexture", value);
+		    get => _material.GetTexture("_MetallicTex");
+		    set => _material.SetTexture("_MetallicTex", value);
 	    }
 
 	    public int MetallicRoughnessTexCoord
@@ -161,16 +161,16 @@ namespace UnityGLTF
 
 	    public Vector2 MetallicRoughnessXOffset
 	    {
-		    get => _material.GetTextureOffset("metallicRoughnessTexture");
-		    set => _material.SetTextureOffset("metallicRoughnessTexture", value);
+		    get => _material.GetTextureOffset("_MetallicTex");
+		    set => _material.SetTextureOffset("_MetallicTex", value);
 	    }
 
 	    public double MetallicRoughnessXRotation { get; set; }
 
 	    public Vector2 MetallicRoughnessXScale
 	    {
-		    get => _material.GetTextureOffset("metallicRoughnessTexture");
-		    set => _material.SetTextureOffset("metallicRoughnessTexture", value);
+		    get => _material.GetTextureOffset("_MetallicTex");
+		    set => _material.SetTextureOffset("_MetallicTex", value);
 	    }
 
 	    public int MetallicRoughnessXTexCoord
