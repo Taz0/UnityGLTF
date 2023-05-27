@@ -179,6 +179,7 @@ namespace UnityGLTF
 
             try
             {
+		UnityEngine.Debug.LogError(ctx.assetPath);
                 sceneName = Path.GetFileNameWithoutExtension(ctx.assetPath);
                 CreateGLTFScene(ctx.assetPath, out gltfScene, out animations);
                 var rootGltfComponent = gltfScene.GetComponent<InstantiatedGLTFObject>();
