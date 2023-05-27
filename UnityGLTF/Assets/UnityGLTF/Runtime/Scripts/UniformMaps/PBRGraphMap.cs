@@ -69,8 +69,8 @@ namespace UnityGLTF
 
 	    public Texture OcclusionTexture
 	    {
-		    get => _material.GetTexture("_Opacity_Map");
-		    set => _material.SetTexture("_Opacity_Map", value);
+		    get => _material.GetTexture("occlusionTexture");
+		    set => _material.SetTexture("occlusionTexture", value);
 	    }
 
 	    public int OcclusionTexCoord
@@ -87,8 +87,8 @@ namespace UnityGLTF
 
 	    public Vector2 OcclusionXOffset
 	    {
-		    get => _material.GetTextureOffset("_Opacity_Map");
-		    set => _material.SetTextureOffset("_Opacity_Map", value);
+		    get => _material.GetTextureOffset("occlusionTexture");
+		    set => _material.SetTextureOffset("occlusionTexture", value);
 	    }
 
 	    public double OcclusionXRotation
@@ -99,8 +99,8 @@ namespace UnityGLTF
 
 	    public Vector2 OcclusionXScale
 	    {
-		    get => _material.GetTextureScale("_Opacity_Map");
-		    set => _material.SetTextureScale("_Opacity_Map", value);
+		    get => _material.GetTextureScale("occlusionTexture");
+		    set => _material.SetTextureScale("occlusionTexture", value);
 	    }
 
 	    public int OcclusionXTexCoord

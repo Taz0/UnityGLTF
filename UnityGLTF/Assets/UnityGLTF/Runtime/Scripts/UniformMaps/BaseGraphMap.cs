@@ -229,8 +229,8 @@ namespace UnityGLTF
 
 	    public Texture BaseColorTexture
 	    {
-		    get => _material.GetTexture("baseColorTexture");
-		    set => _material.SetTexture("baseColorTexture", value);
+		    get => _material.GetTexture("_MainTex");
+		    set => _material.SetTexture("_MainTex", value);
 	    }
 
 	    public int BaseColorTexCoord
