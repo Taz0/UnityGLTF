@@ -465,21 +465,24 @@ namespace UnityGLTF
 		private async Task LoadJson(string jsonFilePath)
 		{
 #if !WINDOWS_UWP && !UNITY_WEBGL
-			var dataLoader2 = _options.DataLoader as IDataLoader2;
-			if (IsMultithreaded && dataLoader2 != null)
+			if (_gltfStream.Stream == null)
 			{
-				Thread loadThread = new Thread(() => _gltfStream.Stream = dataLoader2.LoadStream(jsonFilePath));
-				loadThread.Priority = ThreadPriority.Highest;
-				loadThread.Start();
-				RunCoroutineSync(WaitUntilEnum(new WaitUntil(() => !loadThread.IsAlive)));
-			}
-			else
+				var dataLoader2 = _options.DataLoader as IDataLoader2;
+				if (IsMultithreaded && dataLoader2 != null)
+				{
+					Thread loadThread = new Thread(() => _gltfStream.Stream = dataLoader2.LoadStream(jsonFilePath));
+					loadThread.Priority = ThreadPriority.Highest;
+					loadThread.Start();
+					RunCoroutineSync(WaitUntilEnum(new WaitUntil(() => !loadThread.IsAlive)));
+				}
+				else
 #endif
-			{
-				_gltfStream.Stream = await _options.DataLoader.LoadStreamAsync(jsonFilePath);
-			}
+				{
+					_gltfStream.Stream = await _options.DataLoader.LoadStreamAsync(jsonFilePath);
+				}
 
-			_gltfStream.StartPosition = 0;
+				_gltfStream.StartPosition = 0;
+			}
 
 #if !WINDOWS_UWP && !UNITY_WEBGL
 			if (IsMultithreaded)
