@@ -259,6 +259,14 @@ namespace UnityGLTF
 			}
 		}
 
+		public void SetStream(Stream stream)
+		{
+			if (stream != null)
+			{
+				_gltfStream = new GLBStream { Stream = stream, StartPosition = stream.Position };
+			}
+		}
+
 		public GLTFSceneImporter(GLTFRoot rootNode, Stream gltfStream, ImportOptions options)
 		{
 			_gltfRoot = rootNode;
